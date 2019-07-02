@@ -1,10 +1,7 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mmu.Mls3.WebApi.Controllers
+namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
