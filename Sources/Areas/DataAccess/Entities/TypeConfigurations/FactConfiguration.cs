@@ -17,6 +17,5 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.TypeConfigurations
 
             builder.ToTable("Fact", "Core");
         }
-
     }
 }

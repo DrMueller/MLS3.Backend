@@ -1,0 +1,58 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Mmu.Mls3.WebApi.Areas.DataAccess.Entities;
+using Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Implementation;
+using Mmu.Mls3.WebApi.Areas.Web.Dtos;
+
+namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    ////[Authorize]
+    [AllowAnonymous]
+    public class FactsController : ControllerBase
+    {
+        private readonly IFactRepository _factRepo;
+        private readonly IMapper _mapper;
+
+        public FactsController(IFactRepository factRepository, IMapper mapper)
+        {
+            _factRepo = factRepository;
+            _mapper = mapper;
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteFactAsync(long factId)
+        {
+            await _factRepo.DeleteAsync(factId);
+            return NoContent();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyCollection<FactOverviewEntryDto>>> GetOverviewAsync()
+        {
+            var allFacts = await _factRepo.LoadAllAsync();
+            var result = _mapper.Map<List<FactOverviewEntryDto>>(allFacts);
+            return result;
+        }
+
+        [HttpGet("edit/{id}")]
+        public async Task<ActionResult> LoadEditFactAsync(long factId)
+        {
+            var entity = await _factRepo.LoadByIdAsync(factId);
+            var result = _mapper.Map<FactEditEntryDto>(entity);
+            return Ok(result);
+        }
+
+        [HttpPut("edit")]
+        public async Task<ActionResult> SaveFactAsync([FromBody] FactEditEntryDto dto)
+        {
+            var entity = _mapper.Map<Fact>(dto);
+            await _factRepo.SaveAsync(entity);
+            return Ok();
+        }
+    }
+}

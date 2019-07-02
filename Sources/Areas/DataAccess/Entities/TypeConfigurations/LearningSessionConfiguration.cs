@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,7 +12,7 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Entities.TypeConfigurations
 
             builder.Property(f => f.SessionName).IsRequired();
 
-            builder.ToTable("Fact", "Core");
+            builder.ToTable("LearningSession", "Core");
         }
     }
 }
