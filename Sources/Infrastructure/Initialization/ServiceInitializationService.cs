@@ -16,6 +16,13 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
             services.Configure<AppSettings>(config.GetSection(AppSettings.SectionKey));
             InitializeCors(services);
             InitializeSecurity(services);
+
+            services.Scan(scanner =>
+            {
+                scanner.AssembliesFromApplicationBaseDirectory();
+                scanner.LookForRegistries();
+            });
+
         }
 
         private static void InitializeCors(ServiceRegistry services)
