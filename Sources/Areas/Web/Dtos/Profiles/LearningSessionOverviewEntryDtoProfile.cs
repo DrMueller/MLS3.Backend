@@ -8,6 +8,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Dtos.Profiles
         public LearningSessionOverviewEntryDtoProfile()
         {
             CreateMap<LearningSession, LearningSessionOverviewEntryDto>()
+                .ForMember(d => d.AmountOfFacts, c => c.MapFrom(f => f.LearningSessionFacts.Count))
                 .ForMember(d => d.SessionName, c => c.MapFrom(f => f.SessionName))
                 .ForMember(d => d.Id, c => c.MapFrom(f => f.Id));
         }

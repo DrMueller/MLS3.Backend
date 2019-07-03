@@ -37,22 +37,27 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Servants.Implementation
         {
             foreach (var col in entryToUpdate.Collections)
             {
-                var collectionBeforeUpdate = entryBeforeUpdate.Collection(col.Metadata.Name).CurrentValue.Cast<object>().ToList();
-                var collectionToUpdate = col.CurrentValue.Cast<object>().ToList();
+                var colBeforeUpdate = entryBeforeUpdate.Collection(col.Metadata.Name);
 
-                foreach (var collectionEntityToUpdate in collectionToUpdate)
+                if (colBeforeUpdate?.CurrentValue != null)
                 {
-                    var collectionEntityBeforeUpdate = collectionBeforeUpdate.FirstOrDefault(f => f.Equals(collectionEntityToUpdate));
-                    var collectionEntryToUpdate = dbContext.Entry(collectionEntityToUpdate);
+                    var collectionBeforeUpdate = colBeforeUpdate.CurrentValue.Cast<object>().ToList();
+                    var collectionToUpdate = col.CurrentValue.Cast<object>().ToList();
 
-                    if (collectionEntityBeforeUpdate == null)
+                    foreach (var collectionEntityToUpdate in collectionToUpdate)
                     {
-                        collectionEntryToUpdate.State = EntityState.Added;
-                    }
-                    else
-                    {
-                        var collectionEntryBeforeUpdate = dbContext.Entry(collectionEntityBeforeUpdate);
-                        MarkAddedItemsRecursively(collectionEntryBeforeUpdate, collectionEntryToUpdate, dbContext);
+                        var collectionEntityBeforeUpdate = collectionBeforeUpdate.FirstOrDefault(f => f.Equals(collectionEntityToUpdate));
+                        var collectionEntryToUpdate = dbContext.Entry(collectionEntityToUpdate);
+
+                        if (collectionEntityBeforeUpdate == null)
+                        {
+                            collectionEntryToUpdate.State = EntityState.Added;
+                        }
+                        else
+                        {
+                            var collectionEntryBeforeUpdate = dbContext.Entry(collectionEntityBeforeUpdate);
+                            MarkAddedItemsRecursively(collectionEntryBeforeUpdate, collectionEntryToUpdate, dbContext);
+                        }
                     }
                 }
             }
@@ -65,22 +70,26 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Servants.Implementation
         {
             foreach (var collectionsForEntryToUpdate in entryToUpdate.Collections)
             {
-                var collectionBeforeUpdate = entryBeforeUpdate.Collection(collectionsForEntryToUpdate.Metadata.Name).CurrentValue.Cast<object>().ToList();
-                var collectionToUpdate = collectionsForEntryToUpdate.CurrentValue.Cast<object>().ToList();
-
-                foreach (var collectionEntityBeforeUpdate in collectionBeforeUpdate)
+                var colBeforeUpdate = entryBeforeUpdate.Collection(collectionsForEntryToUpdate.Metadata.Name);
+                if (colBeforeUpdate?.CurrentValue != null)
                 {
-                    var collectionEntryBeforeUpdate = dbContext.Entry(collectionEntityBeforeUpdate);
-                    var currentEntityToUpdate = collectionToUpdate.FirstOrDefault(f => f.Equals(collectionEntityBeforeUpdate));
+                    var collectionBeforeUpdate = colBeforeUpdate.CurrentValue.Cast<object>().ToList();
+                    var collectionToUpdate = collectionsForEntryToUpdate.CurrentValue.Cast<object>().ToList();
 
-                    if (currentEntityToUpdate == null)
+                    foreach (var collectionEntityBeforeUpdate in collectionBeforeUpdate)
                     {
-                        collectionEntryBeforeUpdate.State = EntityState.Deleted;
-                    }
-                    else
-                    {
-                        var currentEntityEntryAfterUpdate = dbContext.Entry(currentEntityToUpdate);
-                        MarkDeletedItemsRecursively(collectionEntryBeforeUpdate, currentEntityEntryAfterUpdate, dbContext);
+                        var collectionEntryBeforeUpdate = dbContext.Entry(collectionEntityBeforeUpdate);
+                        var currentEntityToUpdate = collectionToUpdate.FirstOrDefault(f => f.Equals(collectionEntityBeforeUpdate));
+
+                        if (currentEntityToUpdate == null)
+                        {
+                            collectionEntryBeforeUpdate.State = EntityState.Deleted;
+                        }
+                        else
+                        {
+                            var currentEntityEntryAfterUpdate = dbContext.Entry(currentEntityToUpdate);
+                            MarkDeletedItemsRecursively(collectionEntryBeforeUpdate, currentEntityEntryAfterUpdate, dbContext);
+                        }
                     }
                 }
             }

@@ -22,7 +22,6 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
                 scanner.AssembliesFromApplicationBaseDirectory();
                 scanner.LookForRegistries();
             });
-
         }
 
         private static void InitializeCors(ServiceRegistry services)
