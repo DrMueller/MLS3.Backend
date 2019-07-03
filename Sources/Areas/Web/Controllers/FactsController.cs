@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -25,9 +26,9 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteFactAsync(long factId)
+        public async Task<ActionResult> DeleteFactAsync(long id)
         {
-            await _factRepo.DeleteAsync(factId);
+            await _factRepo.DeleteAsync(id);
             return NoContent();
         }
 
@@ -40,9 +41,9 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         }
 
         [HttpGet("edit/{id}")]
-        public async Task<ActionResult> LoadEditFactAsync(long factId)
+        public async Task<ActionResult> LoadEditFactAsync(long id)
         {
-            var entity = await _factRepo.LoadByIdAsync(factId);
+            var entity = await _factRepo.LoadByIdAsync(id);
             var result = _mapper.Map<FactEditEntryDto>(entity);
             return Ok(result);
         }
@@ -51,6 +52,11 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         public async Task<ActionResult> SaveFactAsync([FromBody] FactEditEntryDto dto)
         {
             var entity = _mapper.Map<Fact>(dto);
+            if (!entity.Id.HasValue)
+            {
+                entity.CreationDate = DateTime.Now;
+            }
+
             await _factRepo.SaveAsync(entity);
             return Ok();
         }

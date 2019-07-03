@@ -8,7 +8,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Dtos.Profiles
         public FactOverviewEntryDtoProfile()
         {
             CreateMap<Fact, FactOverviewEntryDto>()
-                .ForMember(d => d.CreationDate, c => c.MapFrom(f => f.CreationDate))
+                .ForMember(d => d.CreationDateDescription, c => c.MapFrom(f => f.CreationDate.ToString("dd.MM.yyyy hh:mm:ss")))
                 .ForMember(d => d.Id, c => c.MapFrom(f => f.Id))
                 .ForMember(d => d.QuestionText, c => c.MapFrom(f => f.QuestionText));
         }
