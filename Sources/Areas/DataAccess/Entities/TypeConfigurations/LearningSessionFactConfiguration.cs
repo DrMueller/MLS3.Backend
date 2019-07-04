@@ -11,7 +11,7 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Entities.TypeConfigurations
 
             builder
                 .HasOne(f => f.Fact)
-                .WithMany(f => f.LearningSessionFacts)
+                .WithMany()
                 .HasForeignKey(f => f.FactId)
                 .IsRequired();
 
