@@ -1,4 +1,5 @@
-﻿using Lamar;
+﻿using System.Diagnostics.CodeAnalysis;
+using Lamar;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +16,7 @@ namespace Mmu.Mls3.WebApi
             Configuration = configuration;
         }
 
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Needed by ASP.Net Core")]
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             AppInitializationService.InitializeApp(app, env);
