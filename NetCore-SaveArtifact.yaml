@@ -16,7 +16,7 @@ jobs:
 - job: 'BuildAndPublishAsArtifact'
   displayName: 'Build and save zipped Artifact'
   pool:
-    name: 'Hosted Windows 2019 with VS2019'
+    name: 'Default'
   steps:
   - template: AzureDevOps/Templates/StepTemplates/NetCore/Initialize_And_Test.yaml@ALMStuff
     parameters:
