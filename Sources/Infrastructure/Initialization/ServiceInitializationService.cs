@@ -1,5 +1,6 @@
 using AutoMapper;
 using Lamar;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mmu.Mls3.WebApi.Infrastructure.Initialization.Servants;
@@ -11,8 +12,8 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
     {
         internal static void InitializeServices(ServiceRegistry services, IConfiguration config)
         {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddAutoMapper(typeof(ServiceInitializationService).Assembly);
-            services.AddControllers().AddNewtonsoftJson();
             services.Configure<AppSettings>(config.GetSection(AppSettings.SectionKey));
             InitializeCors(services);
             InitializeSecurity(services);

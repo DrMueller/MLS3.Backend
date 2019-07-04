@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 using Mmu.Mls3.WebApi.Infrastructure.Middlewares;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
 {
     public static class AppInitializationService
     {
-        public static void InitializeApp(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void InitializeApp(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -18,17 +17,12 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseCors("All");
             app.UseHttpsRedirection();
-            app.UseRouting();
+            app.UseMvc();
             app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
         }
     }
 }

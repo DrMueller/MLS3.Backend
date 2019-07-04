@@ -1,4 +1,4 @@
-using Lamar;
+﻿using Lamar;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +15,7 @@ namespace Mmu.Mls3.WebApi
             Configuration = configuration;
         }
 
-        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             AppInitializationService.InitializeApp(app, env);
         }
