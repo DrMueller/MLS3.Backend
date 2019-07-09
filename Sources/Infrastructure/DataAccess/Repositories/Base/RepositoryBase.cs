@@ -50,7 +50,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Base
         {
             EntityEntry<TEntity> entityEntry;
 
-            if (entity.Id.Equals(default))
+            if (!entity.Id.HasValue)
             {
                 entityEntry = await DbSet.AddAsync(entity);
             }
