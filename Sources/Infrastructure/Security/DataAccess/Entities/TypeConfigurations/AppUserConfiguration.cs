@@ -13,6 +13,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Security.DataAccess.Entities.TypeConfig
             builder.Property(f => f.NormalizedUserName).IsRequired().HasMaxLength(256);
             builder.Property(f => f.UserName).IsRequired().HasMaxLength(256);
             builder.Property(f => f.HashedPassword).IsRequired().HasMaxLength(256);
+            builder.Property(f => f.EmailAddress).IsRequired().HasMaxLength(256);
 
             builder.ToTable("AppUser", "Security");
         }
