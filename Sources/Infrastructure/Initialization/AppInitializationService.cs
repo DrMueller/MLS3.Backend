@@ -21,8 +21,8 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseCors("All");
             app.UseHttpsRedirection();
-            app.UseMvc();
             app.UseAuthentication();
+            app.UseMvc();
         }
     }
 }

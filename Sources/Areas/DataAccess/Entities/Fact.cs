@@ -1,5 +1,5 @@
 ﻿using System;
-using Mmu.Mls3.WebApi.Areas.DataAccess.Entities.Base;
+using Mmu.Mls3.WebApi.Infrastructure.DataAccess.Entities.Base;
 
 namespace Mmu.Mls3.WebApi.Areas.DataAccess.Entities
 {

@@ -2,9 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Mmu.Mls3.WebApi.Areas.DataAccess.Entities;
-using Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Base;
-using Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Servants;
-using Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Servants.Implementation;
+using Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Base;
+using Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants;
 
 namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Implementation
 {

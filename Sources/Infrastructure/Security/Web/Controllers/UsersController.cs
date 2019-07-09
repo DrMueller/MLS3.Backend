@@ -1,8 +1,10 @@
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Mmu.Mls3.WebApi.Infrastructure.Security.DataAccess.Entities;
 using Mmu.Mls3.WebApi.Infrastructure.Security.Services;
 using Mmu.Mls3.WebApi.Infrastructure.Security.Web.Dtos;
 
@@ -10,43 +12,63 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
-    public class UsersController
+    public class UsersController : ControllerBase
     {
         private readonly IJwtTokenFactory _jwtTokenFactory;
+        private readonly UserManager<AppUser> _userManager;
 
-        public UsersController(IJwtTokenFactory jwtTokenFactory)
+        public UsersController(
+            UserManager<AppUser> userManager,
+            IJwtTokenFactory jwtTokenFactory)
         {
+            _userManager = userManager;
             _jwtTokenFactory = jwtTokenFactory;
         }
 
         [HttpPost("Login")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Controllers can't use static methods")]
-        public ActionResult<LoginResultDto> Login([FromBody] LoginRequestDto requestDto)
+        [AllowAnonymous]
+        public async Task<ActionResult<LoginResultDto>> LoginAsync([FromBody] LoginRequestDto requestDto)
         {
-            // TODO: Outsource username and password
-            if (requestDto.UserName != "Matthias" || requestDto.Password != "test")
+            var user = await _userManager.FindByNameAsync(requestDto.UserName);
+            LoginResultDto result;
+
+            if (user != null && await _userManager.CheckPasswordAsync(user, requestDto.Password))
             {
-                return new LoginResultDto
+                var claims = new List<Claim>
                 {
-                    LoginSuccess = false,
+                    new Claim(ClaimTypes.Name, user.UserName)
+                };
+
+                var token = _jwtTokenFactory.CreateToken(claims);
+                result = new LoginResultDto
+                {
+                    Claims = claims,
+                    LoginSuccess = true,
+                    Token = token,
+                };
+            }
+            else
+            {
+                result = new LoginResultDto
+                {
+                    LoginSuccess = false
                 };
             }
 
-            var claims = new List<Claim>
+            return Ok(result);
+        }
+
+        [HttpPost("Register")]
+        [AllowAnonymous]
+        public async Task<ActionResult> RegisterAsync([FromBody] RegisterDto dto)
+        {
+            var user = new AppUser
             {
-                new Claim(ClaimTypes.NameIdentifier, "mlm"),
-                new Claim(ClaimTypes.Name, "Matthias Müller"),
+                UserName = dto.UserName
             };
 
-            var token = _jwtTokenFactory.CreateToken(claims);
-
-            return new LoginResultDto
-            {
-                Claims = claims,
-                LoginSuccess = true,
-                Token = token,
-            };
+            var result = await _userManager.CreateAsync(user, dto.Password);
+            return Ok();
         }
     }
 }

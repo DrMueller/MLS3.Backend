@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Servants
+namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants
 {
     public class AppDbContext : DbContext
     {

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using Mmu.Mls3.WebApi.Infrastructure.Settings.Models;
 
-namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Servants.Implementation
+namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implementation
 {
     public class DbContextFactory : IDbContextFactory
     {

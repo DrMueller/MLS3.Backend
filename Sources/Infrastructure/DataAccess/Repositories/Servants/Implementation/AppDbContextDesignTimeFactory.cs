@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Mmu.Mls3.WebApi.Infrastructure.Settings.Models;
 
-namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Servants.Implementation
+namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implementation
 {
     public class AppDbContextDesignTimeFactory : IDesignTimeDbContextFactory<AppDbContext>
     {

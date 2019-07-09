@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Servants.Implementation
+namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implementation
 {
     public class EntityEntryStateHandler : IEntityEntryStateHandler
     {

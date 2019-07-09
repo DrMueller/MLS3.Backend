@@ -5,11 +5,10 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Mmu.Mls3.WebApi.Areas.DataAccess.Entities.Base;
-using Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Servants;
-using Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Servants.Implementation;
+using Mmu.Mls3.WebApi.Infrastructure.DataAccess.Entities.Base;
+using Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants;
 
-namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Base
+namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Base
 {
     public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
            where TEntity : EntityBase

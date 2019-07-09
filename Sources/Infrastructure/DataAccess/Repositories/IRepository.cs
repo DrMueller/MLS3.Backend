@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mmu.Mls3.WebApi.Areas.DataAccess.Entities.Base;
+using Mmu.Mls3.WebApi.Infrastructure.DataAccess.Entities.Base;
 
-namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories
+namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories
 {
     public interface IRepository<TEntity>
         where TEntity : EntityBase
