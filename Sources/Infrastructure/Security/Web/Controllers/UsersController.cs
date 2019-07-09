@@ -58,17 +58,17 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
             return Ok(result);
         }
 
-        ////[HttpPost("Register")]
-        ////[AllowAnonymous]
-        ////public async Task<ActionResult> RegisterAsync([FromBody] RegisterDto dto)
-        ////{
-        ////    var user = new AppUser
-        ////    {
-        ////        UserName = dto.UserName
-        ////    };
+        [HttpPost("Register")]
+        [AllowAnonymous]
+        public async Task<ActionResult> RegisterAsync([FromBody] RegisterDto dto)
+        {
+            var user = new AppUser
+            {
+                UserName = dto.UserName
+            };
 
-        ////    var result = await _userManager.CreateAsync(user, dto.Password);
-        ////    return Ok();
-        ////}
+            var result = await _userManager.CreateAsync(user, dto.Password);
+            return Ok();
+        }
     }
 }
