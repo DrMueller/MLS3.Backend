@@ -13,8 +13,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    ////[Authorize]
-    [AllowAnonymous]
+    [Authorize]
     public class LearningSessionsController : ControllerBase
     {
         private readonly IFactRepository _factRepo;
