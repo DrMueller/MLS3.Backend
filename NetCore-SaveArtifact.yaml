@@ -26,6 +26,7 @@ jobs:
     parameters:
       BuildConfiguration: $(BuildConfiguration)
       FolderToPublish: $(FolderToPublish)
+      PublishSubPath: 'App'
   - task: PublishBuildArtifacts@1
     displayName: 'Save Artifact'
     inputs:
