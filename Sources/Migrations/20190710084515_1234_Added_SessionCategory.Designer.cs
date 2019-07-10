@@ -37,7 +37,7 @@ namespace Mmu.Mls3.WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Fact","Core");
+                    b.ToTable("Fact", "Core");
                 });
 
             modelBuilder.Entity("Mmu.Mls3.WebApi.Areas.DataAccess.Entities.LearningSession", b =>
@@ -55,7 +55,7 @@ namespace Mmu.Mls3.WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LearningSession","Core");
+                    b.ToTable("LearningSession", "Core");
                 });
 
             modelBuilder.Entity("Mmu.Mls3.WebApi.Areas.DataAccess.Entities.LearningSessionFact", b =>
@@ -68,7 +68,7 @@ namespace Mmu.Mls3.WebApi.Migrations
 
                     b.HasIndex("LearningSessionId");
 
-                    b.ToTable("LearningSessionFact","Core");
+                    b.ToTable("LearningSessionFact", "Core");
                 });
 
             modelBuilder.Entity("Mmu.Mls3.WebApi.Infrastructure.Security.DataAccess.Entities.AppUser", b =>
@@ -91,7 +91,7 @@ namespace Mmu.Mls3.WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUser","Security");
+                    b.ToTable("AppUser", "Security");
                 });
 
             modelBuilder.Entity("Mmu.Mls3.WebApi.Areas.DataAccess.Entities.LearningSessionFact", b =>

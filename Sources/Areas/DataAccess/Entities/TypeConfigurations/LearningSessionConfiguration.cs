@@ -11,7 +11,6 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Entities.TypeConfigurations
             builder.Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
 
             builder.Property(f => f.SessionName).IsRequired();
-            builder.Property(f => f.SessionCategory).IsRequired().HasMaxLength(256);
 
             builder.ToTable("LearningSession", "Core");
         }
