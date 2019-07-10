@@ -21,6 +21,7 @@ jobs:
   - template: AzureDevOps/Templates/StepTemplates/NetCore/Initialize_And_Test.yaml@ALMStuff
     parameters:
       buildConfiguration: $(BuildConfiguration)
+  - template: AzureDevOps/Templates/StepTemplates/NetCore/Create_SQL_Script.yaml@ALMStuff
   - template: AzureDevOps/Templates/StepTemplates/NetCore/Publish.yaml@ALMStuff
     parameters:
       BuildConfiguration: $(BuildConfiguration)
