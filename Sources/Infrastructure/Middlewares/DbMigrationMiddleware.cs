@@ -29,8 +29,9 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Middlewares
             {
                 var dbContext = _dbContextFactoy.Create();
                 dbContext.Database.Migrate();
-                await _next(httpContext);
             }
+
+            await _next(httpContext);
         }
     }
 }
