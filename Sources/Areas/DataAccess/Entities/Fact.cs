@@ -8,5 +8,6 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Entities
         public string AnswerText { get; set; }
         public DateTime CreationDate { get; set; }
         public string QuestionText { get; set; }
+        public int OneNumber { get; set; }
     }
 }

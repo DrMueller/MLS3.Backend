@@ -14,6 +14,7 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.TypeConfigurations
             builder.Property(f => f.AnswerText).IsRequired();
             builder.Property(f => f.CreationDate).IsRequired();
             builder.Property(f => f.QuestionText).IsRequired();
+            builder.Property(f => f.OneNumber);
 
             builder.ToTable("Fact", "Core");
         }

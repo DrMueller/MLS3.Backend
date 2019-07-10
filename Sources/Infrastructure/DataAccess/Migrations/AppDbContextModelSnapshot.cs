@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants;
 
-namespace Mmu.Mls3.WebApi.Migrations
+namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -29,6 +29,8 @@ namespace Mmu.Mls3.WebApi.Migrations
                         .IsRequired();
 
                     b.Property<DateTime>("CreationDate");
+
+                    b.Property<int>("OneNumber");
 
                     b.Property<string>("QuestionText")
                         .IsRequired();
