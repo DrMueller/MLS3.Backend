@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants;
 
-namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Migrations
+namespace Mmu.Mls3.WebApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190710131224_Added_OneString")]
+    partial class Added_OneString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,8 +50,6 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Migrations
 
                     b.Property<string>("OneString")
                         .IsRequired();
-
-                    b.Property<string>("AnotherString");
 
                     b.Property<string>("SessionName")
                         .IsRequired();
