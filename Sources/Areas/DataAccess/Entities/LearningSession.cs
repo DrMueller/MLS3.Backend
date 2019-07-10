@@ -7,5 +7,6 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Entities
     {
         public ICollection<LearningSessionFact> LearningSessionFacts { get; set; }
         public string SessionName { get; set; }
+        public string OneString { get; set; }
     }
 }
