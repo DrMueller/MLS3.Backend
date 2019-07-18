@@ -24,6 +24,13 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Base
             _entityEntryStateHandler = entityEntryStateHandler;
         }
 
+        public async Task DeleteAllAsync()
+        {
+            var allEntries = await LoadAllAsync();
+            DbSet.RemoveRange(allEntries);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task DeleteAsync(long id)
         {
             var dataModel = await DbSet.SingleOrDefaultAsync(f => f.Id.Equals(id));

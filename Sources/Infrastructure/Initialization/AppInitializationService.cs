@@ -19,7 +19,6 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
 
             app.UseHttpsRedirection();
             app.UseMiddleware<ErrorHandlingMiddleware>();
-            ////app.UseMiddleware<DbMigrationMiddleware>();
             app.UseCors("All");
             app.UseHttpsRedirection();
             app.UseAuthentication();

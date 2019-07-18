@@ -24,6 +24,13 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             _mapper = mapper;
         }
 
+        [HttpDelete]
+        public async Task<ActionResult> DeleteAllFactsAsync()
+        {
+            await _factRepo.DeleteAllAsync();
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteFactAsync(long id)
         {

@@ -37,6 +37,13 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             return NoContent();
         }
 
+        [HttpDelete]
+        public async Task<ActionResult> DeleteAllLearningSessionsAsync()
+        {
+            await _learningSessionRepo.DeleteAllAsync();
+            return NoContent();
+        }
+
         [HttpGet]
         public async Task<ActionResult<IReadOnlyCollection<LearningSessionOverviewEntryDto>>> GetOverviewAsync()
         {

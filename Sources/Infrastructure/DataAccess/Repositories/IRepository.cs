@@ -9,6 +9,8 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories
     {
         Task DeleteAsync(long id);
 
+        Task DeleteAllAsync();
+
         Task<IReadOnlyCollection<TEntity>> LoadAllAsync();
 
         Task<TEntity> LoadByIdAsync(long id);
