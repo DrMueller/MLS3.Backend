@@ -21,6 +21,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Middlewares
         {
             try
             {
+                var tra = httpContext.Request.Method;
                 await _next(httpContext);
             }
             catch (Exception exception)

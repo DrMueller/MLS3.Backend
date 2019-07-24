@@ -45,6 +45,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IReadOnlyCollection<LearningSessionOverviewEntryDto>>> GetOverviewAsync()
         {
             var allSessions = await _learningSessionRepo.LoadAllAsync();
@@ -61,6 +62,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         }
 
         [HttpGet("{id}/runfacts")]
+        [AllowAnonymous]
         public async Task<ActionResult<IReadOnlyCollection<RunFactDto>>> LoadRunFactsAsync(long id)
         {
             var session = await _learningSessionRepo.LoadByIdAsync(id);

@@ -8,17 +8,12 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
     {
         public static void InitializeApp(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
+            app.UseMiddleware<ErrorHandlingMiddleware>();
+            if (!env.IsDevelopment())
             {
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseCors("All");
             app.UseHttpsRedirection();
             app.UseAuthentication();

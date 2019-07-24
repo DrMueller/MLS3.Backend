@@ -1,10 +1,9 @@
+using System;
 using AutoMapper;
 using Lamar;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants;
 using Mmu.Mls3.WebApi.Infrastructure.Initialization.Servants;
 using Mmu.Mls3.WebApi.Infrastructure.Security.DataAccess.Entities;
 using Mmu.Mls3.WebApi.Infrastructure.Security.Native;
@@ -41,9 +40,11 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
                     options.AddPolicy(
                         "All",
                         builder =>
-                            builder.AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader());
+                            builder
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowCredentials());
                 });
         }
 
