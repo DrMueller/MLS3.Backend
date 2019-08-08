@@ -16,18 +16,13 @@ jobs:
 - job: 'BuildAndPublishAsArtifact'
   displayName: 'Build and save zipped Artifact'
   pool:
-    name: 'Hosted Windows 2019 with VS2019'
+    name: 'Hosted VS2017'
   steps:
-  - template: AzureDevOps/Templates/StepTemplates/NetCore/Initialize_And_Test.yaml@ALMStuff
+  - template: AzureDevOps/BuildTemplates/NetCore/Steps/Initialize_And_Test.yaml@ALMStuff
     parameters:
       buildConfiguration: $(BuildConfiguration)
-  - template: AzureDevOps/Templates/StepTemplates/NetCore/Create_SQL_Script.yaml@ALMStuff
-  - template: AzureDevOps/Templates/StepTemplates/NetCore/Publish.yaml@ALMStuff
+  - template: AzureDevOps/BuildTemplates/NetCore/Steps/Publish.yaml@ALMStuff
     parameters:
       BuildConfiguration: $(BuildConfiguration)
       FolderToPublish: $(FolderToPublish)
-      PublishSubPath: 'App'
-  - task: PublishBuildArtifacts@1
-    displayName: 'Save Artifact'
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  - template: AzureDevOps/BuildTemplates/NetCore/Steps/Zip_And_Save_Artifact.yaml@ALMStuff
