@@ -29,7 +29,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Security.Services.Implementation
                 Audience = null,
                 IssuedAt = DateTime.UtcNow,
                 NotBefore = DateTime.UtcNow,
-                Expires = null,
+                Expires = DateTime.MaxValue,
                 Subject = new ClaimsIdentity(claims),
                 SigningCredentials = credentials,
             };

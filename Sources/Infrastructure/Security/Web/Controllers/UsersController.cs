@@ -31,16 +31,6 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
             _jwtTokenFactory = jwtTokenFactory;
         }
 
-        ////[HttpGet("Tra")]
-        ////[AllowAnonymous]
-        ////public ActionResult<string> Test()
-        ////{
-        ////    return Ok(new Tra
-        ////    {
-        ////        Hello = "Hello Tra"
-        ////    });
-        ////}
-
         [HttpPost("Login")]
         [AllowAnonymous]
         public async Task<ActionResult<LoginResultDto>> LoginAsync([FromBody] LoginRequestDto requestDto)
