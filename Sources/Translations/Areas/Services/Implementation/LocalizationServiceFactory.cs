@@ -56,7 +56,7 @@ namespace Mmu.Mls3.Localization.Areas.Services.Implementation
         private static string CreateResourceKey(Type type)
         {
             var typeNamewithNamespace = type.FullName.Replace(BaseAssemblyNamespace, string.Empty, StringComparison.Ordinal);
-            var resourceKey = BaseResourcePath + typeNamewithNamespace;
+            var resourceKey = string.Concat(BaseResourcePath, typeNamewithNamespace, ".", type.Name);
             return resourceKey;
         }
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mmu.Mls3.Localization.Areas.Translations.WebApi.Areas.Web.Controllers {
+namespace Mmu.Mls3.Localization.Areas.Translations.WebApi.Areas.Web.Controllers.HelloController {
     using System;
     
     
@@ -40,7 +40,7 @@ namespace Mmu.Mls3.Localization.Areas.Translations.WebApi.Areas.Web.Controllers 
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mmu.Mls3.Localization.Areas.Translations.WebApi.Areas.Web.Controllers.HelloContro" +
-                            "ller", typeof(HelloController).Assembly);
+                            "ller.HelloController", typeof(HelloController).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,7 +62,7 @@ namespace Mmu.Mls3.Localization.Areas.Translations.WebApi.Areas.Web.Controllers 
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello there.
+        ///   Looks up a localized string similar to Hello {0}, how are you?.
         /// </summary>
         internal static string Hello {
             get {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mmu.Mls3.Localization.Areas.Localization.Services;
+using Mmu.Mls3.Localization.Areas.Translations.WebApi.Areas.Web.Controllers.HelloController;
 using Mmu.Mls3.WebApi.Areas.Web.Dtos;
 
 namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
@@ -22,7 +23,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         {
             var service1 = _localizationServiceFactory.CreateFor(GetType());
             var service2 = _localizationServiceFactory.CreateFor(GetType());
-            var localizedHello = service1.Localize("Hello", name);
+            var localizedHello = service1.Localize(TranslationKeys.Hello, name);
 
             var response = new HelloResponseDto
             {
