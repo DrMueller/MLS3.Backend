@@ -26,6 +26,8 @@ jobs:
       RelativeFolderPath: 'Sources\WebApi'
   - template: AzureDevOps/BuildTemplates/NetCore/Steps/Publish.yaml@ALMStuff
     parameters:
+    parameters:
       BuildConfiguration: $(BuildConfiguration)
       FolderToPublish: $(FolderToPublish)
+      PublishSubPath: 'App'
   - template: AzureDevOps/BuildTemplates/NetCore/Steps/Zip_And_Save_Artifact.yaml@ALMStuff
