@@ -29,4 +29,7 @@ jobs:
       BuildConfiguration: $(BuildConfiguration)
       FolderToPublish: $(FolderToPublish)
       PublishSubPath: 'App'
-  - template: AzureDevOps/BuildTemplates/NetCore/Steps/Zip_And_Save_Artifact.yaml@ALMStuff
+  - task: PublishBuildArtifacts@1
+    displayName: 'Save Artifact'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
