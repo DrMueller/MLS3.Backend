@@ -22,6 +22,8 @@ jobs:
     parameters:
       buildConfiguration: $(BuildConfiguration)
   - template: AzureDevOps/BuildTemplates/NetCore/Steps/Create_SQL_Script.yaml@ALMStuff
+    parameters:
+      RelativeFolderPath: 'Sources\WebApi'
   - template: AzureDevOps/BuildTemplates/NetCore/Steps/Publish.yaml@ALMStuff
     parameters:
       BuildConfiguration: $(BuildConfiguration)
