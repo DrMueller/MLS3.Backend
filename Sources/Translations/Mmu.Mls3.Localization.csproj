@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>Mmu.Mls3.Localization</AssemblyName>
+    <RootNamespace>Mmu.Mls3.Localization</RootNamespace>
+    <Features>IOperation</Features>
+    <CodeAnalysisRuleSet>..\..\CA_ProductionCode.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lamar" Version="3.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="2.2.0" />
+    <PackageReference Include="Mmu.Mlh.LanguageExtensions" Version="2.1.23" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Areas\Translations\WebApi\Areas\Web\Controllers\HelloContrroller.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HelloContrroller.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Areas\Translations\WebApi\Areas\Web\Controllers\HelloContrroller.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>HelloContrroller.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
