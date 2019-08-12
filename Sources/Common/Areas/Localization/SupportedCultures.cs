@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace Mmu.Mls3.Localization.Areas
+namespace Mmu.Mls3.Common.Areas.Localization
 {
     public static class SupportedCultures
     {

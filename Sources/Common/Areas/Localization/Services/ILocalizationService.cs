@@ -1,4 +1,4 @@
-﻿namespace Mmu.Mls3.Localization.Areas.Localization.Services
+﻿namespace Mmu.Mls3.Common.Areas.Localization.Services
 {
     public interface ILocalizationService
     {

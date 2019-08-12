@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Mmu.Mls3.Localization.Areas.Localization.Services;
-using Mmu.Mls3.Localization.Areas.Translations.WebApi.Areas.Web.Controllers.HelloController;
+using Mmu.Mls3.Common.Areas.Localization.Services;
 using Mmu.Mls3.WebApi.Areas.Web.Dtos;
 
 namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
@@ -11,6 +10,8 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
     [AllowAnonymous]
     public class HelloController : ControllerBase
     {
+        private const string LocalizationKeyHello = "Hello";
+
         private readonly ILocalizationServiceFactory _localizationServiceFactory;
 
         public HelloController(ILocalizationServiceFactory localizationServiceFactory)
@@ -22,8 +23,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         public ActionResult<string> SayHello(string name)
         {
             var service1 = _localizationServiceFactory.CreateFor(GetType());
-            var service2 = _localizationServiceFactory.CreateFor(GetType());
-            var localizedHello = service1.Localize(TranslationKeys.Hello, name);
+            var localizedHello = service1.Localize(LocalizationKeyHello, name);
 
             var response = new HelloResponseDto
             {

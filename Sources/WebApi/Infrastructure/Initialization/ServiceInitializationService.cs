@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Mmu.Mls3.Localization.Areas;
+using Mmu.Mls3.Common.Areas.Localization;
 using Mmu.Mls3.WebApi.Infrastructure.Initialization.Servants;
 using Mmu.Mls3.WebApi.Infrastructure.Security.DataAccess.Entities;
 using Mmu.Mls3.WebApi.Infrastructure.Security.Native;

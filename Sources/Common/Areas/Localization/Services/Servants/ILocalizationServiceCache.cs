@@ -1,7 +1,6 @@
 ﻿using Mmu.Mlh.LanguageExtensions.Areas.Types.FunctionsResults;
-using Mmu.Mls3.Localization.Areas.Localization.Services;
 
-namespace Mmu.Mls3.Localization.Areas.Services.Servants
+namespace Mmu.Mls3.Common.Areas.Localization.Services.Servants
 {
     internal interface ILocalizationServiceCache
     {

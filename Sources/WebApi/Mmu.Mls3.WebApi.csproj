@@ -14,7 +14,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
-    <PackageReference Include="Lamar" Version="3.0.3" />
+    <PackageReference Include="Lamar" Version="3.0.5" />
     <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
@@ -36,6 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Translations\Mmu.Mls3.Localization.csproj" />
+    <ProjectReference Include="..\Common\Mmu.Mls3.Common.csproj" />
   </ItemGroup>
 </Project>

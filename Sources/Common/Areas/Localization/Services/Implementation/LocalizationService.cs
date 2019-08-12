@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Localization;
-using Mmu.Mls3.Localization.Areas.Localization.Services;
 
-namespace Mmu.Mls3.Localization.Areas.Services.Implementation
+namespace Mmu.Mls3.Common.Areas.Localization.Services.Implementation
 {
     internal class LocalizationService : ILocalizationService
     {

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.Mls3.WebApi", "Sources\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.Mls3.Localization", "Sources\Translations\Mmu.Mls3.Localization.csproj", "{BF01CBF2-31A3-47F2-8EA3-5BAD5AE69806}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.Mls3.Common", "Sources\Common\Mmu.Mls3.Common.csproj", "{4091DBDB-042E-4D83-B8FC-9437466D5EBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BF01CBF2-31A3-47F2-8EA3-5BAD5AE69806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF01CBF2-31A3-47F2-8EA3-5BAD5AE69806}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF01CBF2-31A3-47F2-8EA3-5BAD5AE69806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4091DBDB-042E-4D83-B8FC-9437466D5EBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4091DBDB-042E-4D83-B8FC-9437466D5EBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4091DBDB-042E-4D83-B8FC-9437466D5EBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4091DBDB-042E-4D83-B8FC-9437466D5EBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
