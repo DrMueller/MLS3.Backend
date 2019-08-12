@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mmu.Mls3.Localization.Areas.Translations.WebApi.Areas.Web.Controllers.HelloController {
+namespace Mmu.Mls3.Localization.WebApi.Areas.Web.Controllers.HelloController {
     using System;
     
     
