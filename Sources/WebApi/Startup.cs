@@ -3,6 +3,7 @@ using Lamar;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Mmu.Mls3.WebApi.Infrastructure.DropboxLocation;
 using Mmu.Mls3.WebApi.Infrastructure.Initialization;
 
 namespace Mmu.Mls3.WebApi
@@ -15,9 +16,19 @@ namespace Mmu.Mls3.WebApi
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            var dropboxPath = DropboxLocator.LocateDropboxSettingsPath();
+            if (dropboxPath.IsSuccess)
+            {
+                builder.AddJsonFile(dropboxPath.Value, optional: false, reloadOnChange: true);
+            }
+            else
+            {
+                builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            }
+
             Configuration = builder.Build();
         }
 
