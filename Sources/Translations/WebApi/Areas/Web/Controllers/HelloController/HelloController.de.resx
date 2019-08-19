@@ -119,5 +119,9 @@
   </resheader>
   <data name="Hello" xml:space="preserve">
     <value>Hallo {0}, wie geht es dir?</value>
+    <comment>Test Comment</comment>
+  </data>
+  <data name="PleaseOpen" xml:space="preserve">
+    <value>Bitte öffnen Sie die Seite {Settings}, um Ihr System zu konfigurieren.</value>
   </data>
 </root>
