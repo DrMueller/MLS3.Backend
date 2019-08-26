@@ -30,6 +30,13 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             _mapper = mapper;
         }
 
+        [HttpDelete]
+        public async Task<ActionResult> DeleteAllLearningSessionsAsync()
+        {
+            await _learningSessionRepo.DeleteAllAsync();
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteLearningSessionAsync(long id)
         {
@@ -37,11 +44,12 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
-        public async Task<ActionResult> DeleteAllLearningSessionsAsync()
+        [HttpGet("{id}/nextid")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetNextLearningSessionAsync(long id)
         {
-            await _learningSessionRepo.DeleteAllAsync();
-            return NoContent();
+            var nextId = await _learningSessionRepo.LoadNextIdAsync(id);
+            return Ok(nextId);
         }
 
         [HttpGet]

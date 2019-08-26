@@ -15,9 +15,9 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Implementation
         {
         }
 
-        public Task<IReadOnlyCollection<Fact>> LoadByIdsAsync(IReadOnlyCollection<long> factIds)
+        public async Task<IReadOnlyCollection<Fact>> LoadByIdsAsync(IReadOnlyCollection<long> factIds)
         {
-            return LoadAsync(f => factIds.Contains(f.Id.Value));
+            return await Query().Where(f => factIds.Contains(f.Id.Value)).ToListAsync();
         }
 
         protected override IQueryable<Fact> AppendIncludes(IQueryable<Fact> query)

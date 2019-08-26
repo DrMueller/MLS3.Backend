@@ -45,7 +45,8 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Base
 
         public async Task<IReadOnlyCollection<TEntity>> LoadAllAsync()
         {
-            return await LoadAsync(f => true);
+            var entities = await Query().ToListAsync();
+            return entities;
         }
 
         public async Task<TEntity> LoadByIdAsync(long id)
@@ -81,20 +82,19 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Base
             return query;
         }
 
-        protected async Task<IReadOnlyCollection<TEntity>> LoadAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            var query = _dbContext.Set<TEntity>().Where(predicate);
-            query = AppendIncludes(query);
-            var result = await query.ToListAsync();
-            return result;
-        }
-
         protected async Task<TEntity> LoadSingleAsync(Expression<Func<TEntity, bool>> predicate)
         {
             var query = _dbContext.Set<TEntity>().Where(predicate);
             query = AppendIncludes(query);
             var result = await query.SingleOrDefaultAsync();
             return result;
+        }
+
+        protected IQueryable<TEntity> Query()
+        {
+            var query = _dbContext.Set<TEntity>().AsQueryable();
+            query = AppendIncludes(query);
+            return query;
         }
     }
 }
