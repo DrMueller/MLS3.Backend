@@ -35,33 +35,46 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<LoginResultDto>> LoginAsync([FromBody] LoginRequestDto requestDto)
         {
-            var user = await _userManager.FindByNameAsync(requestDto.UserName);
-            LoginResultDto result;
+            var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, "Matthias")
+                };
 
-            if (user != null && await _userManager.CheckPasswordAsync(user, requestDto.Password))
+            var token = _jwtTokenFactory.CreateToken(claims);
+            return Ok(new LoginResultDto
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.UserName)
-                };
+                Claims = claims,
+                LoginSuccess = true,
+                Token = token,
+            });
 
-                var token = _jwtTokenFactory.CreateToken(claims);
-                result = new LoginResultDto
-                {
-                    Claims = claims,
-                    LoginSuccess = true,
-                    Token = token,
-                };
-            }
-            else
-            {
-                result = new LoginResultDto
-                {
-                    LoginSuccess = false
-                };
-            }
+            //var user = await _userManager.FindByNameAsync(requestDto.UserName);
+            //LoginResultDto result;
 
-            return Ok(result);
+            //if (user != null && await _userManager.CheckPasswordAsync(user, requestDto.Password))
+            //{
+            //    var claims = new List<Claim>
+            //    {
+            //        new Claim(ClaimTypes.Name, user.UserName)
+            //    };
+
+            //    var token = _jwtTokenFactory.CreateToken(claims);
+            //    result = new LoginResultDto
+            //    {
+            //        Claims = claims,
+            //        LoginSuccess = true,
+            //        Token = token,
+            //    };
+            //}
+            //else
+            //{
+            //    result = new LoginResultDto
+            //    {
+            //        LoginSuccess = false
+            //    };
+            //}
+
+            //return Ok(result);
         }
 
         [HttpPost("Register")]
