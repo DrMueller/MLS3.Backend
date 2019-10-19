@@ -92,7 +92,8 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
                 entity.LearningSessionFacts = new List<LearningSessionFact>();
             }
 
-            await _learningSessionRepo.SaveAsync(entity);
+            var savedEntity = await _learningSessionRepo.SaveAsync(entity);
+            var result = _mapper.Map<LearningSessionEditEntryDto>(savedEntity);
             return Ok();
         }
     }
