@@ -9,7 +9,8 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Dtos.Profiles
         {
             CreateMap<Fact, RunFactDto>()
                 .ForMember(d => d.AnswerText, c => c.MapFrom(f => f.AnswerText))
-                .ForMember(d => d.QuestionText, c => c.MapFrom(f => f.QuestionText));
+                .ForMember(d => d.QuestionText, c => c.MapFrom(f => f.QuestionText))
+                .ForMember(d => d.Id, c => c.MapFrom(f => f.Id));
         }
     }
 }

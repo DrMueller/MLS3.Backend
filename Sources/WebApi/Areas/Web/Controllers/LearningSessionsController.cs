@@ -30,18 +30,26 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             _mapper = mapper;
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteLearningSessionAsync(long id)
-        {
-            await _learningSessionRepo.DeleteAsync(id);
-            return NoContent();
-        }
-
         [HttpDelete]
         public async Task<ActionResult> DeleteAllLearningSessionsAsync()
         {
             await _learningSessionRepo.DeleteAllAsync();
             return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<long>> DeleteLearningSessionAsync(long id)
+        {
+            await _learningSessionRepo.DeleteAsync(id);
+            return Ok(id);
+        }
+
+        [HttpGet("{id}/nextid")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetNextLearningSessionAsync(long id)
+        {
+            var nextId = await _learningSessionRepo.LoadNextIdAsync(id);
+            return Ok(nextId);
         }
 
         [HttpGet]
@@ -51,6 +59,15 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             var allSessions = await _learningSessionRepo.LoadAllAsync();
             var result = _mapper.Map<List<LearningSessionOverviewEntryDto>>(allSessions);
             return result;
+        }
+
+        [HttpGet("overview/{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<LearningSessionOverviewEntryDto>> GetOverviewEntryByIdAsync(long id)
+        {
+            var session = await _learningSessionRepo.LoadByIdAsync(id);
+            var result = _mapper.Map<LearningSessionOverviewEntryDto>(session);
+            return Ok(result);
         }
 
         [HttpGet("edit/{id}")]
@@ -84,8 +101,9 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
                 entity.LearningSessionFacts = new List<LearningSessionFact>();
             }
 
-            await _learningSessionRepo.SaveAsync(entity);
-            return Ok();
+            var returnedEntry = await _learningSessionRepo.SaveAsync(entity);
+            var result = _mapper.Map<LearningSessionEditEntryDto>(returnedEntry);
+            return Ok(result);
         }
     }
 }
