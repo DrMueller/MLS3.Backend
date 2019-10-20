@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -33,10 +32,10 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteFactAsync(long id)
+        public async Task<ActionResult<long>> DeleteFactAsync(long id)
         {
             await _factRepo.DeleteAsync(id);
-            return NoContent();
+            return Ok(id);
         }
 
         [HttpGet]
@@ -45,6 +44,14 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             var allFacts = await _factRepo.LoadAllAsync();
             var result = _mapper.Map<List<FactOverviewEntryDto>>(allFacts);
             return result;
+        }
+
+        [HttpGet("overview/{id}")]
+        public async Task<ActionResult<LearningSessionOverviewEntryDto>> GetOverviewEntryByIdAsync(long id)
+        {
+            var fact = await _factRepo.LoadByIdAsync(id);
+            var result = _mapper.Map<FactOverviewEntryDto>(fact);
+            return Ok(result);
         }
 
         [HttpGet("edit/{id}")]
@@ -56,16 +63,25 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         }
 
         [HttpPut("edit")]
-        public async Task<ActionResult> SaveFactAsync([FromBody] FactEditEntryDto dto)
+        public async Task<ActionResult<FactEditEntryDto>> SaveFactAsync([FromBody] FactEditEntryDto dto)
         {
-            var entity = _mapper.Map<Fact>(dto);
-            if (!entity.Id.HasValue)
+            Fact entity;
+
+            if (dto.Id.HasValue)
             {
+                entity = await _factRepo.LoadByIdAsync(dto.Id.Value);
+                entity.AnswerText = dto.AnswerText;
+                entity.QuestionText = dto.QuestionText;
+            }
+            else
+            {
+                entity = _mapper.Map<Fact>(dto);
                 entity.CreationDate = DateTime.Now;
             }
 
-            await _factRepo.SaveAsync(entity);
-            return Ok();
+            var savedEntity = await _factRepo.SaveAsync(entity);
+            var result = _mapper.Map<FactEditEntryDto>(savedEntity);
+            return Ok(result);
         }
     }
 }

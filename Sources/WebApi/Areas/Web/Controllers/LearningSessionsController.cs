@@ -91,7 +91,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         }
 
         [HttpPut("edit")]
-        public async Task<ActionResult> SaveSessionAsync([FromBody] LearningSessionEditEntryDto dto)
+        public async Task<ActionResult<LearningSessionEditEntryDto>> SaveSessionAsync([FromBody] LearningSessionEditEntryDto dto)
         {
             var entity = _mapper.Map<LearningSession>(dto);
             entity.LearningSessionFacts = dto.FactIds.Select(id => new LearningSessionFact { FactId = id }).ToList();
