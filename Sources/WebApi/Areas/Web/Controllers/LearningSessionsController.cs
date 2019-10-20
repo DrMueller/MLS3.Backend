@@ -44,12 +44,12 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             return Ok(id);
         }
 
-        [HttpGet("{id}/nextid")]
+        [HttpGet("{id}/next")]
         [AllowAnonymous]
-        public async Task<ActionResult> GetNextLearningSessionAsync(long id)
+        public async Task<ActionResult<long>> LoadNextRunFactsAsync(long id)
         {
-            var nextId = await _learningSessionRepo.LoadNextIdAsync(id);
-            return Ok(nextId);
+            var nextSessionId = await _learningSessionRepo.LoadNextIdAsync(id);
+            return Ok(nextSessionId);
         }
 
         [HttpGet]
