@@ -28,7 +28,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         public async Task<ActionResult> DeleteAllFactsAsync()
         {
             await _factRepo.DeleteAllAsync();
-            return NoContent();
+            return NoContent();>
         }
 
         [HttpDelete("{id}")]
