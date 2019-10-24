@@ -2,7 +2,7 @@
 
 namespace Mmu.Mls3.WebApi.Areas.Web.Dtos
 {
-    public class LearningSessionEditEntryDto
+    public class LearningSessionDto
     {
         public List<long> FactIds { get; set; }
         public long? Id { get; set; }

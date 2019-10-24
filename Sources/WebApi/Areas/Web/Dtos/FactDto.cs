@@ -1,8 +1,11 @@
-﻿namespace Mmu.Mls3.WebApi.Areas.Web.Dtos
+﻿using System;
+
+namespace Mmu.Mls3.WebApi.Areas.Web.Dtos
 {
-    public class FactEditEntryDto
+    public class FactDto
     {
         public string AnswerText { get; set; }
+        public DateTime CreationDate { get; set; }
         public long? Id { get; set; }
         public string QuestionText { get; set; }
     }

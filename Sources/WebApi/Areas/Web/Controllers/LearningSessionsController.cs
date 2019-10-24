@@ -31,14 +31,14 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteAllLearningSessionsAsync()
+        public async Task<ActionResult> DeleteAllAsync()
         {
             await _learningSessionRepo.DeleteAllAsync();
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<long>> DeleteLearningSessionAsync(long id)
+        public async Task<ActionResult<long>> DeleteAsync(long id)
         {
             await _learningSessionRepo.DeleteAsync(id);
             return Ok(id);
@@ -46,7 +46,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
 
         [HttpGet("{id}/next")]
         [AllowAnonymous]
-        public async Task<ActionResult<long>> LoadNextRunFactsAsync(long id)
+        public async Task<ActionResult<long>> LoadNextIdAsync(long id)
         {
             var nextSessionId = await _learningSessionRepo.LoadNextIdAsync(id);
             return Ok(nextSessionId);
@@ -54,44 +54,36 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IReadOnlyCollection<LearningSessionOverviewEntryDto>>> GetOverviewAsync()
+        public async Task<ActionResult<IReadOnlyCollection<LearningSessionDto>>> GetOverviewAsync()
         {
             var allSessions = await _learningSessionRepo.LoadAllAsync();
-            var result = _mapper.Map<List<LearningSessionOverviewEntryDto>>(allSessions);
+            var result = _mapper.Map<List<LearningSessionDto>>(allSessions);
             return result;
         }
 
-        [HttpGet("overview/{id}")]
+        [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<LearningSessionOverviewEntryDto>> GetOverviewEntryByIdAsync(long id)
+        public async Task<ActionResult<LearningSessionDto>> GetByIdAsync(long id)
         {
             var session = await _learningSessionRepo.LoadByIdAsync(id);
-            var result = _mapper.Map<LearningSessionOverviewEntryDto>(session);
+            var result = _mapper.Map<LearningSessionDto>(session);
             return Ok(result);
         }
 
-        [HttpGet("edit/{id}")]
-        public async Task<ActionResult> LoadEditSessionAsync(long id)
-        {
-            var entity = await _learningSessionRepo.LoadByIdAsync(id);
-            var result = _mapper.Map<LearningSessionEditEntryDto>(entity);
-            return Ok(result);
-        }
+        //[HttpGet("{id}")]
+        //[AllowAnonymous]
+        //public async Task<ActionResult<IReadOnlyCollection<LearningSessionDto>>> GetRunFactsAsync(long id)
+        //{
+        //    var session = await _learningSessionRepo.LoadByIdAsync(id);
+        //    var factIds = session.LearningSessionFacts.Select(f => f.FactId).ToList();
+        //    var facts = await _factRepo.LoadByIdsAsync(factIds);
 
-        [HttpGet("{id}/runfacts")]
-        [AllowAnonymous]
-        public async Task<ActionResult<IReadOnlyCollection<RunFactDto>>> LoadRunFactsAsync(long id)
-        {
-            var session = await _learningSessionRepo.LoadByIdAsync(id);
-            var factIds = session.LearningSessionFacts.Select(f => f.FactId).ToList();
-            var facts = await _factRepo.LoadByIdsAsync(factIds);
+        //    var result = _mapper.Map<List<LearningSessionDto>>(facts);
+        //    return result;
+        //}
 
-            var result = _mapper.Map<List<RunFactDto>>(facts);
-            return result;
-        }
-
-        [HttpPut("edit")]
-        public async Task<ActionResult<LearningSessionEditEntryDto>> SaveSessionAsync([FromBody] LearningSessionEditEntryDto dto)
+        [HttpPut()]
+        public async Task<ActionResult<LearningSessionDto>> SaveAsync([FromBody] LearningSessionDto dto)
         {
             var entity = _mapper.Map<LearningSession>(dto);
             entity.LearningSessionFacts = dto.FactIds.Select(id => new LearningSessionFact { FactId = id }).ToList();
@@ -102,7 +94,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             }
 
             var returnedEntry = await _learningSessionRepo.SaveAsync(entity);
-            var result = _mapper.Map<LearningSessionEditEntryDto>(returnedEntry);
+            var result = _mapper.Map<LearningSessionDto>(returnedEntry);
             return Ok(result);
         }
     }
