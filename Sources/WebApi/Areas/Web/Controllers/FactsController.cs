@@ -54,7 +54,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             return Ok(result);
         }
 
-        [HttpPut()]
+        [HttpPut]
         public async Task<ActionResult<FactDto>> SaveAsync([FromBody] FactDto dto)
         {
             Fact entity;
