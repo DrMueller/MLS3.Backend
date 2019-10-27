@@ -82,7 +82,7 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         //    return result;
         //}
 
-        [HttpPut()]
+        [HttpPut]
         public async Task<ActionResult<LearningSessionDto>> SaveAsync([FromBody] LearningSessionDto dto)
         {
             var entity = _mapper.Map<LearningSession>(dto);

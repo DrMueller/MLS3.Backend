@@ -15,9 +15,11 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Implementation
         {
         }
 
-        public async Task<IReadOnlyCollection<Fact>> LoadByIdsAsync(IReadOnlyCollection<long> factIds)
+        public async Task<IReadOnlyCollection<Fact>> LoadByLearningSessionId(long learningSessionId)
         {
-            return await Query().Where(f => factIds.Contains(f.Id.Value)).ToListAsync();
+            return await Query()
+                .Where(f => f.LearningSessionFacts.Select(fc => fc.LearningSessionId).Contains(learningSessionId))
+                .ToListAsync();
         }
 
         protected override IQueryable<Fact> AppendIncludes(IQueryable<Fact> query)

@@ -7,6 +7,6 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Implementation
 {
     public interface IFactRepository : IRepository<Fact>
     {
-        Task<IReadOnlyCollection<Fact>> LoadByIdsAsync(IReadOnlyCollection<long> factIds);
+        Task<IReadOnlyCollection<Fact>> LoadByLearningSessionId(long learningSessionId);
     }
 }
