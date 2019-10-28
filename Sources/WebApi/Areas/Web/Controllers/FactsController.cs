@@ -46,14 +46,6 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             return result;
         }
 
-        //[HttpGet("byLearningSession/{learningSessionId}")]
-        //public async Task<ActionResult<IReadOnlyCollection<FactDto>>> GetBySessionIdAsync(long learningSessionId)
-        //{
-        //    var allFacts = await _factRepo.LoadByLearningSessionId(learningSessionId);
-        //    var result = _mapper.Map<List<FactDto>>(allFacts);
-        //    return result;
-        //}
-
         [HttpGet("{id}")]
         public async Task<ActionResult<FactDto>> GetByIdAsync(long id)
         {
