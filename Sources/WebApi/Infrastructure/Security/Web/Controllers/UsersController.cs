@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Mmu.Mls3.WebApi.Infrastructure.Security.DataAccess.Entities;
@@ -11,11 +10,6 @@ using Mmu.Mls3.WebApi.Infrastructure.Security.Web.Dtos;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
 {
-    ////public class Tra
-    ////{
-    ////    public string Hello { get; set; }
-    ////}
-
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -35,46 +29,33 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<LoginResultDto>> LoginAsync([FromBody] LoginRequestDto requestDto)
         {
-            var claims = new List<Claim>
+            var user = await _userManager.FindByNameAsync(requestDto.UserName);
+            LoginResultDto result;
+
+            if (user != null && await _userManager.CheckPasswordAsync(user, requestDto.Password))
+            {
+                var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, "Matthias")
+                    new Claim(ClaimTypes.Name, user.UserName)
                 };
 
-            var token = _jwtTokenFactory.CreateToken(claims);
-            return Ok(new LoginResultDto
+                var token = _jwtTokenFactory.CreateToken(claims);
+                result = new LoginResultDto
+                {
+                    Claims = claims,
+                    LoginSuccess = true,
+                    Token = token,
+                };
+            }
+            else
             {
-                Claims = claims,
-                LoginSuccess = true,
-                Token = token,
-            });
+                result = new LoginResultDto
+                {
+                    LoginSuccess = false
+                };
+            }
 
-            //var user = await _userManager.FindByNameAsync(requestDto.UserName);
-            //LoginResultDto result;
-
-            //if (user != null && await _userManager.CheckPasswordAsync(user, requestDto.Password))
-            //{
-            //    var claims = new List<Claim>
-            //    {
-            //        new Claim(ClaimTypes.Name, user.UserName)
-            //    };
-
-            //    var token = _jwtTokenFactory.CreateToken(claims);
-            //    result = new LoginResultDto
-            //    {
-            //        Claims = claims,
-            //        LoginSuccess = true,
-            //        Token = token,
-            //    };
-            //}
-            //else
-            //{
-            //    result = new LoginResultDto
-            //    {
-            //        LoginSuccess = false
-            //    };
-            //}
-
-            //return Ok(result);
+            return Ok(result);
         }
 
         [HttpPost("Register")]
