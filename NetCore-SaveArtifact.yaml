@@ -3,6 +3,7 @@ name: 1.0$(rev:.r) # build numbering format
 variables:
   BuildConfiguration: 'Release'
   FolderToPublish: 'WebApi'
+  PublishPath: '$(Build.ArtifactStagingDirectory)/App'
 
 resources:
   repositories:
@@ -28,7 +29,7 @@ jobs:
     parameters:
       BuildConfiguration: $(BuildConfiguration)
       FolderToPublish: $(FolderToPublish)
-      PublishSubPath: 'App'
+      PublishPath: $(PublishPath)
   - task: PublishBuildArtifacts@1
     displayName: 'Save Artifact'
     inputs:
