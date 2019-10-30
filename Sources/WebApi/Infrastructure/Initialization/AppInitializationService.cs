@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Mmu.Mls3.Common.Areas.Localization;
-using Mmu.Mls3.WebApi.Infrastructure.Middlewares;
+using Mmu.Mls3.WebApi.Infrastructure.Middlewares.ErrorHandling;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
 {

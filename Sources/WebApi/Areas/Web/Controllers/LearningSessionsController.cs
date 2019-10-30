@@ -16,17 +16,14 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
     [Authorize]
     public class LearningSessionsController : ControllerBase
     {
-        private readonly IFactRepository _factRepo;
         private readonly ILearningSessionRepository _learningSessionRepo;
         private readonly IMapper _mapper;
 
         public LearningSessionsController(
             ILearningSessionRepository learningSessionRepo,
-            IFactRepository factRepo,
             IMapper mapper)
         {
             _learningSessionRepo = learningSessionRepo;
-            _factRepo = factRepo;
             _mapper = mapper;
         }
 
@@ -69,18 +66,6 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
             var result = _mapper.Map<LearningSessionDto>(session);
             return Ok(result);
         }
-
-        //[HttpGet("{id}")]
-        //[AllowAnonymous]
-        //public async Task<ActionResult<IReadOnlyCollection<LearningSessionDto>>> GetRunFactsAsync(long id)
-        //{
-        //    var session = await _learningSessionRepo.LoadByIdAsync(id);
-        //    var factIds = session.LearningSessionFacts.Select(f => f.FactId).ToList();
-        //    var facts = await _factRepo.LoadByIdsAsync(factIds);
-
-        //    var result = _mapper.Map<List<LearningSessionDto>>(facts);
-        //    return result;
-        //}
 
         [HttpPut]
         public async Task<ActionResult<LearningSessionDto>> SaveAsync([FromBody] LearningSessionDto dto)

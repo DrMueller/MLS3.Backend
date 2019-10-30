@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace Mmu.Mls3.WebApi.Infrastructure.Middlewares
+namespace Mmu.Mls3.WebApi.Infrastructure.Middlewares.ErrorHandling
 {
     internal class ErrorHandlingMiddleware
     {
@@ -21,7 +21,6 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Middlewares
         {
             try
             {
-                var tra = httpContext.Request.Method;
                 await _next(httpContext);
             }
             catch (Exception exception)

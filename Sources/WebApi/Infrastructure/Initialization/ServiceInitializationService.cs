@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Linq;
 using AutoMapper;
 using Lamar;
@@ -11,6 +12,7 @@ using Mmu.Mls3.WebApi.Infrastructure.Initialization.Servants;
 using Mmu.Mls3.WebApi.Infrastructure.Security.DataAccess.Entities;
 using Mmu.Mls3.WebApi.Infrastructure.Security.Native;
 using Mmu.Mls3.WebApi.Infrastructure.Settings.Models;
+using Newtonsoft.Json.Converters;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
 {
@@ -18,7 +20,15 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
     {
         internal static void InitializeServices(ServiceRegistry services, IConfiguration config)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options =>
+                    options.SerializerSettings.Converters.Add(new IsoDateTimeConverter
+                    {
+                        DateTimeStyles = DateTimeStyles.AdjustToUniversal
+                    }));
+
             services
                 .AddIdentityCore<AppUser>()
                 .AddUserStore<AppUserStore>();

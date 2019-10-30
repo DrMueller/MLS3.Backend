@@ -1,7 +1,7 @@
 using System;
 using Mmu.Mlh.LanguageExtensions.Areas.Invariance;
 
-namespace Mmu.Mls3.WebApi.Infrastructure.Middlewares
+namespace Mmu.Mls3.WebApi.Infrastructure.Middlewares.ErrorHandling
 {
     internal class ServerException
     {
