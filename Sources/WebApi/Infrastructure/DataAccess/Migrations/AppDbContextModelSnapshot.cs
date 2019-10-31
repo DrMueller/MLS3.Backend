@@ -94,7 +94,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Migrations
             modelBuilder.Entity("Mmu.Mls3.WebApi.Areas.DataAccess.Entities.LearningSessionFact", b =>
                 {
                     b.HasOne("Mmu.Mls3.WebApi.Areas.DataAccess.Entities.Fact", "Fact")
-                        .WithMany()
+                        .WithMany("LearningSessionFacts")
                         .HasForeignKey("FactId")
                         .OnDelete(DeleteBehavior.Cascade);
 
