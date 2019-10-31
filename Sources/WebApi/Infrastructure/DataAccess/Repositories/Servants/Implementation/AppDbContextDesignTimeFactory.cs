@@ -50,7 +50,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
             }
 
             // This means we're on the build server, which actually doesn't need the connection string
-            return string.Empty;
+            return "Not needed";
         }
     }
 }
