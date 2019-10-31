@@ -23,6 +23,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
             return new AppDbContext(options);
         }
 
+        // We really need this code only locally, as the scripts are applied via SQL, so we pretty much us the local connection string?
         private static string ReadConnectionString()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -42,7 +43,14 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
                 .GetService<IOptions<AppSettings>>();
 
             var keyVaultPath = settings.Value.ConnectionStringKeyVaultPath;
-            return KeyVaultProvider.ProvideSecret(keyVaultPath);
+            var readResult = KeyVaultProvider.TryProvidingSecret(keyVaultPath);
+            if (readResult.IsSuccess)
+            {
+                return readResult.Value;
+            }
+
+            // This means we're on the build server, which actually doesn't need the connection string
+            return string.Empty;
         }
     }
 }

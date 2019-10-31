@@ -16,10 +16,10 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
 
         public DbContext Create()
         {
-            var connectionString = KeyVaultProvider.ProvideSecret(_appSettings.Value.ConnectionStringKeyVaultPath);
+            var secretResult = KeyVaultProvider.TryProvidingSecret(_appSettings.Value.ConnectionStringKeyVaultPath);
 
             var options = new DbContextOptionsBuilder()
-                .UseSqlServer(connectionString)
+                .UseSqlServer(secretResult.Value)
                 .ConfigureWarnings(f => f.Throw())
                 .Options;
 
