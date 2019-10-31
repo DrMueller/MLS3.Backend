@@ -19,6 +19,13 @@ jobs:
   pool:
     name: 'Hosted VS2017'
   steps:
+  - task: AzureKeyVault@1
+    displayName: 'Azure Key Vault: MmuKeyVault'
+    inputs:
+      azureSubscription: 'Pay-As-You-Go (91660754-3529-407f-8458-92759935fbf7)'
+      KeyVaultName: MmuKeyVault
+      SecretsFilter: Mls3ConnectionString
+    continueOnError: true
   - template: AzureDevOps/BuildTemplates/NetCore/Steps/Initialize_And_Test.yaml@ALMStuff
     parameters:
       buildConfiguration: $(BuildConfiguration)
