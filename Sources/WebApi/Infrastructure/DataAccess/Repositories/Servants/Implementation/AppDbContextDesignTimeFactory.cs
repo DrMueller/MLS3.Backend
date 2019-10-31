@@ -25,24 +25,25 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
 
         private static string ReadConnectionString()
         {
-            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            var currentDir = Directory.GetCurrentDirectory();
+            return "Tra";
+            ////var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            ////var currentDir = Directory.GetCurrentDirectory();
 
-            var configRoot = new ConfigurationBuilder()
-                .SetBasePath(currentDir)
-                .AddJsonFile("appsettings.json", false, false)
-                .AddJsonFile($"appsettings.{environment}.json", true)
-                .Build();
+            ////var configRoot = new ConfigurationBuilder()
+            ////    .SetBasePath(currentDir)
+            ////    .AddJsonFile("appsettings.json", false, false)
+            ////    .AddJsonFile($"appsettings.{environment}.json", true)
+            ////    .Build();
 
-            var section = configRoot.GetSection(AppSettings.SectionKey);
-            var settings = new ServiceCollection()
-                .Configure<AppSettings>(section)
-                .AddSingleton(configRoot)
-                .BuildServiceProvider()
-                .GetService<IOptions<AppSettings>>();
+            ////var section = configRoot.GetSection(AppSettings.SectionKey);
+            ////var settings = new ServiceCollection()
+            ////    .Configure<AppSettings>(section)
+            ////    .AddSingleton(configRoot)
+            ////    .BuildServiceProvider()
+            ////    .GetService<IOptions<AppSettings>>();
 
-            var keyVaultPath = settings.Value.ConnectionStringKeyVaultPath;
-            return KeyVaultProvider.ProvideSecret(keyVaultPath);
+            ////var keyVaultPath = settings.Value.ConnectionStringKeyVaultPath;
+            ////return KeyVaultProvider.ProvideSecret(keyVaultPath);
         }
     }
 }
