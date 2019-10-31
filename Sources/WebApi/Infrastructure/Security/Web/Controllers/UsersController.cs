@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Mmu.Mls3.WebApi.Infrastructure.Security.DataAccess.Entities;
@@ -11,11 +10,6 @@ using Mmu.Mls3.WebApi.Infrastructure.Security.Web.Dtos;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
 {
-    ////public class Tra
-    ////{
-    ////    public string Hello { get; set; }
-    ////}
-
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -35,11 +29,6 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<LoginResultDto>> LoginAsync([FromBody] LoginRequestDto requestDto)
         {
-            ////var claims = new List<Claim>
-            ////    {
-            ////        new Claim(ClaimTypes.Name, "Matthias")
-            ////    };
-
             var user = await _userManager.FindByNameAsync(requestDto.UserName);
             LoginResultDto result;
 
