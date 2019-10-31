@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Mmu.Mls3.WebApi.Infrastructure.DataAccess.ConnectionStrings;
 using Mmu.Mls3.WebApi.Infrastructure.Settings.Models;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implementation
@@ -15,7 +16,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
 
         public DbContext Create()
         {
-            var connectionString = _appSettings.Value.ConnectionString;
+            var connectionString = KeyVaultProvider.ProvideSecret(_appSettings.Value.ConnectionStringKeyVaultPath);
 
             var options = new DbContextOptionsBuilder()
                 .UseSqlServer(connectionString)

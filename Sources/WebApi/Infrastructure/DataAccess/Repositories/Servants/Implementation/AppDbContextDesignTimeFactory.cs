@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Mmu.Mls3.WebApi.Infrastructure.DataAccess.ConnectionStrings;
 using Mmu.Mls3.WebApi.Infrastructure.Settings.Models;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implementation
@@ -40,7 +41,8 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
                 .BuildServiceProvider()
                 .GetService<IOptions<AppSettings>>();
 
-            return settings.Value.ConnectionString;
+            var keyVaultPath = settings.Value.ConnectionStringKeyVaultPath;
+            return KeyVaultProvider.ProvideSecret(keyVaultPath);
         }
     }
 }

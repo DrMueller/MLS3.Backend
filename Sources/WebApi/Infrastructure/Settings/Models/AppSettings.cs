@@ -4,7 +4,7 @@
     {
         public const string SectionKey = "AppSettings";
 
-        public string ConnectionString { get; set; }
+        public string ConnectionStringKeyVaultPath { get; set; }
         public string SecretKey { get; set; }
         public bool AutoMigrateDatabase { get; set; }
     }
