@@ -49,7 +49,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
             if (!readResult.IsSuccess)
             {
                 // This means we're on the build server, which actually doesn't need the connection string
-                var tra = Environment.GetEnvironmentVariable("Mls3ConnectionString");
+                var tra = Environment.GetEnvironmentVariable("HelloWorld");
                 Console.WriteLine(tra);
                 Debug.WriteLine(tra);
                 return tra;
