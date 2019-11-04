@@ -5,7 +5,7 @@ using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Mmu.Mlh.LanguageExtensions.Areas.Types.FunctionsResults;
 
-namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.ConnectionStrings
+namespace Mmu.Mls3.WebApi.Infrastructure.KeyVaults
 {
     internal static class KeyVaultProvider
     {
@@ -14,13 +14,14 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.ConnectionStrings
         {
             try
             {
-                var task = Task.Run(async () =>
-                {
-                    var azureServiceTokenProvider = new AzureServiceTokenProvider();
-                    var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
-                    var secret = await keyVaultClient.GetSecretAsync(secretIdentifier).ConfigureAwait(false);
-                    return secret.Value;
-                });
+                var task = Task.Run(
+                    async () =>
+                    {
+                        var azureServiceTokenProvider = new AzureServiceTokenProvider();
+                        var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
+                        var secret = await keyVaultClient.GetSecretAsync(secretIdentifier).ConfigureAwait(false);
+                        return secret.Value;
+                    });
 
                 return FunctionResult.CreateSuccess(task.Result);
             }

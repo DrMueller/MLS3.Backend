@@ -11,14 +11,13 @@ using Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants;
 namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Base
 {
     public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
-           where TEntity : EntityBase
+        where TEntity : EntityBase
     {
         private readonly DbContext _dbContext;
         private readonly IEntityEntryStateHandler _entityEntryStateHandler;
-
         private DbSet<TEntity> DbSet => _dbContext.Set<TEntity>();
 
-        public RepositoryBase(IDbContextFactory dbContextFactory, IEntityEntryStateHandler entityEntryStateHandler)
+        protected RepositoryBase(IDbContextFactory dbContextFactory, IEntityEntryStateHandler entityEntryStateHandler)
         {
             _dbContext = dbContextFactory.Create();
             _entityEntryStateHandler = entityEntryStateHandler;

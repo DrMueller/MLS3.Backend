@@ -7,6 +7,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants
         public AppDbContext(DbContextOptions options)
             : base(options)
         {
+            // ReSharper disable once VirtualMemberCallInConstructor
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 

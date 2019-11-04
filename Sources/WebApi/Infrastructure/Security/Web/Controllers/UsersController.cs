@@ -8,7 +8,7 @@ using Mmu.Mls3.WebApi.Infrastructure.Security.DataAccess.Entities;
 using Mmu.Mls3.WebApi.Infrastructure.Security.Services;
 using Mmu.Mls3.WebApi.Infrastructure.Security.Web.Dtos;
 
-namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
+namespace Mmu.Mls3.WebApi.Infrastructure.Security.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -34,25 +34,14 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
 
             if (user != null && await _userManager.CheckPasswordAsync(user, requestDto.Password))
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.UserName)
-                };
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.UserName) };
 
                 var token = _jwtTokenFactory.CreateToken(claims);
-                result = new LoginResultDto
-                {
-                    Claims = claims,
-                    LoginSuccess = true,
-                    Token = token,
-                };
+                result = new LoginResultDto { Claims = claims, LoginSuccess = true, Token = token, };
             }
             else
             {
-                result = new LoginResultDto
-                {
-                    LoginSuccess = false
-                };
+                result = new LoginResultDto { LoginSuccess = false };
             }
 
             return Ok(result);
@@ -62,12 +51,8 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Security.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> RegisterAsync([FromBody] RegisterDto dto)
         {
-            var user = new AppUser
-            {
-                UserName = dto.UserName
-            };
-
-            var result = await _userManager.CreateAsync(user, dto.Password);
+            var user = new AppUser { UserName = dto.UserName };
+            await _userManager.CreateAsync(user, dto.Password);
             return Ok();
         }
     }

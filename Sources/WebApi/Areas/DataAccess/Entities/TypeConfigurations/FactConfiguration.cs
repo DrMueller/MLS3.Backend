@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Mmu.Mls3.WebApi.Areas.DataAccess.Entities;
 
-namespace Mmu.Mls3.WebApi.Areas.DataAccess.TypeConfigurations
+namespace Mmu.Mls3.WebApi.Areas.DataAccess.Entities.TypeConfigurations
 {
     public class FactConfiguration : IEntityTypeConfiguration<Fact>
     {

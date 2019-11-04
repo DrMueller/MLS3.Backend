@@ -7,13 +7,16 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization.Servants
     {
         internal static void Initialize(IServiceCollection services)
         {
-            services.AddAuthorization(opt =>
-            {
-                opt.AddPolicy("Management", cfg =>
+            services.AddAuthorization(
+                opt =>
                 {
-                    cfg.RequireClaim(ClaimTypes.NameIdentifier);
+                    opt.AddPolicy(
+                        "Management",
+                        cfg =>
+                        {
+                            cfg.RequireClaim(ClaimTypes.NameIdentifier);
+                        });
                 });
-            });
         }
     }
 }

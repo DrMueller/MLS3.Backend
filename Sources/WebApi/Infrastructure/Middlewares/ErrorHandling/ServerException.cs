@@ -1,15 +1,21 @@
 using System;
+using JetBrains.Annotations;
 using Mmu.Mlh.LanguageExtensions.Areas.Invariance;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.Middlewares.ErrorHandling
 {
     internal class ServerException
     {
+        [UsedImplicitly]
         public string Message { get; }
+
+        [UsedImplicitly]
         public string StackTrace { get; }
+
+        [UsedImplicitly]
         public string TypeName { get; }
 
-        public ServerException(string message, string typeName, string stackTrace)
+        private ServerException(string message, string typeName, string stackTrace)
         {
             Guard.StringNotNullOrEmpty(() => message);
             Guard.StringNotNullOrEmpty(() => typeName);

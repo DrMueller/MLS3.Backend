@@ -7,9 +7,9 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
     public class EntityEntryStateHandler : IEntityEntryStateHandler
     {
         public void AlignEntityEntryStatesRecursively(
-           EntityEntry entryBeforeUpdate,
-           EntityEntry entryToUpdate,
-           DbContext dbContext)
+            EntityEntry entryBeforeUpdate,
+            EntityEntry entryToUpdate,
+            DbContext dbContext)
         {
             MarkDeletedItemsRecursively(entryBeforeUpdate, entryToUpdate, dbContext);
             MarkAddedItemsRecursively(entryBeforeUpdate, entryToUpdate, dbContext);

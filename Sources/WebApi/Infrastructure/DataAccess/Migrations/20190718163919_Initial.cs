@@ -6,6 +6,25 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Migrations
 {
     public partial class Initial : Migration
     {
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "LearningSessionFact",
+                schema: "Core");
+
+            migrationBuilder.DropTable(
+                name: "AppUser",
+                schema: "Security");
+
+            migrationBuilder.DropTable(
+                name: "Fact",
+                schema: "Core");
+
+            migrationBuilder.DropTable(
+                name: "LearningSession",
+                schema: "Core");
+        }
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
@@ -26,9 +45,9 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Migrations
                     QuestionText = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fact", x => x.Id);
-                });
+                             {
+                                 table.PrimaryKey("PK_Fact", x => x.Id);
+                             });
 
             migrationBuilder.CreateTable(
                 name: "LearningSession",
@@ -41,9 +60,9 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Migrations
                     OneString = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
-                {
-                    table.PrimaryKey("PK_LearningSession", x => x.Id);
-                });
+                             {
+                                 table.PrimaryKey("PK_LearningSession", x => x.Id);
+                             });
 
             migrationBuilder.CreateTable(
                 name: "AppUser",
@@ -57,61 +76,38 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Migrations
                     UserName = table.Column<string>(maxLength: 256, nullable: false)
                 },
                 constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUser", x => x.Id);
-                });
+                             {
+                                 table.PrimaryKey("PK_AppUser", x => x.Id);
+                             });
 
             migrationBuilder.CreateTable(
                 name: "LearningSessionFact",
                 schema: "Core",
-                columns: table => new
-                {
-                    FactId = table.Column<long>(nullable: false),
-                    LearningSessionId = table.Column<long>(nullable: false)
-                },
+                columns: table => new { FactId = table.Column<long>(nullable: false), LearningSessionId = table.Column<long>(nullable: false) },
                 constraints: table =>
-                {
-                    table.PrimaryKey("PK_LearningSessionFact", x => new { x.FactId, x.LearningSessionId });
-                    table.ForeignKey(
-                        name: "FK_LearningSessionFact_Fact_FactId",
-                        column: x => x.FactId,
-                        principalSchema: "Core",
-                        principalTable: "Fact",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_LearningSessionFact_LearningSession_LearningSessionId",
-                        column: x => x.LearningSessionId,
-                        principalSchema: "Core",
-                        principalTable: "LearningSession",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+                             {
+                                 table.PrimaryKey("PK_LearningSessionFact", x => new { x.FactId, x.LearningSessionId });
+                                 table.ForeignKey(
+                                     name: "FK_LearningSessionFact_Fact_FactId",
+                                     column: x => x.FactId,
+                                     principalSchema: "Core",
+                                     principalTable: "Fact",
+                                     principalColumn: "Id",
+                                     onDelete: ReferentialAction.Cascade);
+                                 table.ForeignKey(
+                                     name: "FK_LearningSessionFact_LearningSession_LearningSessionId",
+                                     column: x => x.LearningSessionId,
+                                     principalSchema: "Core",
+                                     principalTable: "LearningSession",
+                                     principalColumn: "Id",
+                                     onDelete: ReferentialAction.Cascade);
+                             });
 
             migrationBuilder.CreateIndex(
                 name: "IX_LearningSessionFact_LearningSessionId",
                 schema: "Core",
                 table: "LearningSessionFact",
                 column: "LearningSessionId");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "LearningSessionFact",
-                schema: "Core");
-
-            migrationBuilder.DropTable(
-                name: "AppUser",
-                schema: "Security");
-
-            migrationBuilder.DropTable(
-                name: "Fact",
-                schema: "Core");
-
-            migrationBuilder.DropTable(
-                name: "LearningSession",
-                schema: "Core");
         }
     }
 }

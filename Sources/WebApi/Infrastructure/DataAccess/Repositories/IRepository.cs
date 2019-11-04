@@ -7,9 +7,9 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories
     public interface IRepository<TEntity>
         where TEntity : EntityBase
     {
-        Task DeleteAsync(long id);
-
         Task DeleteAllAsync();
+
+        Task DeleteAsync(long id);
 
         Task<IReadOnlyCollection<TEntity>> LoadAllAsync();
 

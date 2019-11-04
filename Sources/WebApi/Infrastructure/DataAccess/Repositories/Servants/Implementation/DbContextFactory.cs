@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Mmu.Mls3.WebApi.Infrastructure.DataAccess.ConnectionStrings;
+using Mmu.Mls3.WebApi.Infrastructure.KeyVaults;
 using Mmu.Mls3.WebApi.Infrastructure.Settings.Models;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implementation

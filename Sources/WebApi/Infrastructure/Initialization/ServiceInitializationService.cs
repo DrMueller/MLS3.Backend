@@ -23,11 +23,9 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
             services
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(options =>
-                    options.SerializerSettings.Converters.Add(new IsoDateTimeConverter
-                    {
-                        DateTimeStyles = DateTimeStyles.AdjustToUniversal
-                    }));
+                .AddJsonOptions(
+                    options =>
+                        options.SerializerSettings.Converters.Add(new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AdjustToUniversal }));
 
             services
                 .AddIdentityCore<AppUser>()
@@ -39,11 +37,12 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
             InitializeSecurity(services, config);
             InitializeLocalisation(services);
 
-            services.Scan(scanner =>
-            {
-                scanner.AssembliesFromApplicationBaseDirectory();
-                scanner.LookForRegistries();
-            });
+            services.Scan(
+                scanner =>
+                {
+                    scanner.AssembliesFromApplicationBaseDirectory();
+                    scanner.LookForRegistries();
+                });
         }
 
         private static void InitializeCors(ServiceRegistry services)
@@ -55,10 +54,10 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
                         "All",
                         builder =>
                             builder
-                            .AllowAnyOrigin()
-                            .AllowAnyHeader()
-                            .AllowAnyMethod()
-                            .AllowCredentials());
+                                .AllowAnyOrigin()
+                                .AllowAnyHeader()
+                                .AllowAnyMethod()
+                                .AllowCredentials());
                 });
         }
 

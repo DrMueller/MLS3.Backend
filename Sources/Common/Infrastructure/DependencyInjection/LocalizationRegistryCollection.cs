@@ -10,11 +10,12 @@ namespace Mmu.Mls3.Common.Infrastructure.DependencyInjection
     {
         public LocalizationRegistryCollection()
         {
-            Scan(scanner =>
-            {
-                scanner.AssemblyContainingType<LocalizationRegistryCollection>();
-                scanner.WithDefaultConventions();
-            });
+            Scan(
+                scanner =>
+                {
+                    scanner.AssemblyContainingType<LocalizationRegistryCollection>();
+                    scanner.WithDefaultConventions();
+                });
 
             // Localization
             For<ILocalizationServiceFactory>().Use<LocalizationServiceFactory>().Singleton();

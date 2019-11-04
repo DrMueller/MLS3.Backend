@@ -6,7 +6,7 @@ using Mmu.Mls3.WebApi.Infrastructure.Security.DataAccess.Repositories;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.Security.Native
 {
-    public sealed class AppUserStore : IUserStore<AppUser>, IUserPasswordStore<AppUser>
+    public sealed class AppUserStore : IUserPasswordStore<AppUser>
     {
         private readonly IAppUserRepository _appUserRepo;
 

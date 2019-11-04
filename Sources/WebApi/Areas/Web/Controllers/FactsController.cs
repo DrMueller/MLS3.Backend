@@ -5,7 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mmu.Mls3.WebApi.Areas.DataAccess.Entities;
-using Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Implementation;
+using Mmu.Mls3.WebApi.Areas.DataAccess.Repositories;
 using Mmu.Mls3.WebApi.Areas.Web.Dtos;
 
 namespace Mmu.Mls3.WebApi.Areas.Web.Controllers

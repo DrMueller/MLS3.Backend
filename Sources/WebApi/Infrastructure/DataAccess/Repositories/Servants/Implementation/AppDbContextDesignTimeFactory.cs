@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Mmu.Mls3.WebApi.Infrastructure.DataAccess.ConnectionStrings;
+using Mmu.Mls3.WebApi.Infrastructure.KeyVaults;
 using Mmu.Mls3.WebApi.Infrastructure.Settings.Models;
 
 namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implementation
@@ -44,13 +44,13 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
 
             var keyVaultPath = settings.Value.ConnectionStringKeyVaultPath;
             var readResult = KeyVaultProvider.TryProvidingSecret(keyVaultPath);
-            if (readResult.IsSuccess)
+            if (!readResult.IsSuccess)
             {
-                return readResult.Value;
+                // This means we're on the build server, which actually doesn't need the connection string
+                var tra = Environment.GetEnvironmentVariable("Mls3ConnectionString");
+                Console.WriteLine(tra);
+                return tra;
             }
-
-            // This means we're on the build server, which actually doesn't need the connection string
-            return "Not needed";
         }
     }
 }

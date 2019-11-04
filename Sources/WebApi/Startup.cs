@@ -10,7 +10,7 @@ namespace Mmu.Mls3.WebApi
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public Startup(IHostingEnvironment env)
         {
@@ -20,14 +20,10 @@ namespace Mmu.Mls3.WebApi
                 .AddEnvironmentVariables();
 
             var dropboxPath = DropboxLocator.LocateDropboxSettingsPath();
-            if (dropboxPath.IsSuccess)
-            {
-                builder.AddJsonFile(dropboxPath.Value, optional: false, reloadOnChange: true);
-            }
-            else
-            {
-                builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-            }
+            builder.AddJsonFile(
+                dropboxPath.IsSuccess ? dropboxPath.Value : "appsettings.json",
+                optional: false,
+                reloadOnChange: true);
 
             Configuration = builder.Build();
         }

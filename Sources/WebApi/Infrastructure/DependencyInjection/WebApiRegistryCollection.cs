@@ -6,11 +6,12 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DependencyInjection
     {
         public WebApiRegistryCollection()
         {
-            Scan(scanner =>
-            {
-                scanner.AssemblyContainingType<WebApiRegistryCollection>();
-                scanner.WithDefaultConventions();
-            });
+            Scan(
+                scanner =>
+                {
+                    scanner.AssemblyContainingType<WebApiRegistryCollection>();
+                    scanner.WithDefaultConventions();
+                });
         }
     }
 }

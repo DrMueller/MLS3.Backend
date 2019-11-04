@@ -16,17 +16,19 @@ namespace Mmu.Mls3.WebApi.Areas.DataAccess.Repositories.Implementation
 
         public async Task<long> LoadNextIdAsync(long currentId)
         {
-            var largerIds = await Query()
-                .Where(f => f.Id > currentId)
+            var largerId = await Query()
+                .Where(f => f.Id.HasValue && f.Id > currentId)
                 .OrderBy(f => f.Id)
-                .ToListAsync();
+                .FirstOrDefaultAsync();
 
-            if (largerIds.Any())
+            if (largerId?.Id != null)
             {
-                return largerIds.First().Id.Value;
+                return largerId.Id.Value;
             }
 
-            return Query().OrderBy(f => f.Id).First().Id.Value;
+            // If there is no larger id, we start with the smallest one
+            var firstId = Query().Select(f => f.Id).OrderBy(id => id).FirstOrDefault();
+            return firstId ?? 0;
         }
 
         protected override IQueryable<LearningSession> AppendIncludes(IQueryable<LearningSession> query)

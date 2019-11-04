@@ -28,12 +28,7 @@ namespace Mmu.Mls3.WebApi.Infrastructure.Initialization
 
         private static void InitializeLocalization(IApplicationBuilder app)
         {
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("en"),
-                SupportedCultures = SupportedCultures.All.Value.ToList(),
-                SupportedUICultures = SupportedCultures.All.Value.ToList()
-            });
+            app.UseRequestLocalization(new RequestLocalizationOptions { DefaultRequestCulture = new RequestCulture("en"), SupportedCultures = SupportedCultures.All.Value.ToList(), SupportedUICultures = SupportedCultures.All.Value.ToList() });
         }
     }
 }

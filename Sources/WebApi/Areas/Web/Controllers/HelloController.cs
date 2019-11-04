@@ -11,7 +11,6 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
     public class HelloController : ControllerBase
     {
         private const string LocalizationKeyHello = "Hello";
-
         private readonly ILocalizationServiceFactory _localizationServiceFactory;
 
         public HelloController(ILocalizationServiceFactory localizationServiceFactory)
@@ -23,14 +22,9 @@ namespace Mmu.Mls3.WebApi.Areas.Web.Controllers
         public ActionResult<string> SayHello(string name)
         {
             var service1 = _localizationServiceFactory.CreateFor(GetType());
-            var service2 = _localizationServiceFactory.CreateFor(GetType());
             var localizedHello = service1.Localize(LocalizationKeyHello, name);
-            var localizedHello2 = service2.Localize(LocalizationKeyHello, name);
 
-            var response = new HelloResponseDto
-            {
-                HelloMessage = localizedHello
-            };
+            var response = new HelloResponseDto { HelloMessage = localizedHello };
 
             return Ok(response);
         }
