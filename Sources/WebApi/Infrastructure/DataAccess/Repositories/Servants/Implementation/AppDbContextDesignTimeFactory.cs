@@ -51,6 +51,8 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
                 Console.WriteLine(tra);
                 return tra;
             }
+
+            return readResult.Value;
         }
     }
 }
