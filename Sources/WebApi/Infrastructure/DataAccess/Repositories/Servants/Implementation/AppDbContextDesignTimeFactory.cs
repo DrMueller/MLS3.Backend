@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -44,11 +45,13 @@ namespace Mmu.Mls3.WebApi.Infrastructure.DataAccess.Repositories.Servants.Implem
 
             var keyVaultPath = settings.Value.ConnectionStringKeyVaultPath;
             var readResult = KeyVaultProvider.TryProvidingSecret(keyVaultPath);
+
             if (!readResult.IsSuccess)
             {
                 // This means we're on the build server, which actually doesn't need the connection string
                 var tra = Environment.GetEnvironmentVariable("Mls3ConnectionString");
                 Console.WriteLine(tra);
+                Debug.WriteLine(tra);
                 return tra;
             }
 
